@@ -4,10 +4,10 @@ import { TorrentComponent } from './torrent.component';
 import { TorrentRoutesModule } from './torrent.routes.module';
 
 @NgModule({
-  declarations: [TorrentComponent],
   imports: [
     CommonModule,
-    TorrentRoutesModule
-  ]
+    TorrentRoutesModule,
+  ],
+  declarations: [TorrentComponent]
 })
 export class TorrentModule { }

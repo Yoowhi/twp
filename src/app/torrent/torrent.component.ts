@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TorrentService } from './torrent.service';
 
 @Component({
   selector: 'app-torrent',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TorrentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private torrentService: TorrentService) { }
 
   ngOnInit() {
   }
