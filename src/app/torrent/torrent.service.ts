@@ -5,6 +5,8 @@ import * as WebTorrent from 'webtorrent';
   providedIn: 'root'
 })
 export class TorrentService {
-
-  constructor() { }
+  torrentClient: WebTorrent.Instance;
+  constructor() {
+    this.torrentClient = new WebTorrent();
+  }
 }
