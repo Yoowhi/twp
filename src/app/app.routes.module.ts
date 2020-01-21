@@ -3,13 +3,14 @@ import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {
-    path: '**',
+    path: '',
     loadChildren: () => import('./torrent/torrent.module').then(module => module.TorrentModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutesModule {
 }
