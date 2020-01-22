@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Playlist, Track} from '../types/helpers';
 import {TrackService} from './track.service';
 
@@ -14,13 +14,12 @@ export class QueueService {
   }
 
   public setPlaylist(playlist: Playlist) {
-    this.queue = playlist.tracks.slice(); // Duplicate
-    this.currentTrack = -1; // |==>---
-    this.nextTrack();
+    this.queue = [...playlist.tracks]; // Duplicate
+    this.currentTrack = 0;
   }
 
   public addPlaylist(playlist: Playlist) {
-    playlist.tracks.forEach(value => this.queue.push(value));
+    this.queue = [...this.queue, ...playlist.tracks];
   }
 
   public addTrack(track: Track) {
@@ -31,13 +30,14 @@ export class QueueService {
     // TODO
   }
 
-  public nextTrack() {
+  public nextTrack(): Track {
     this.currentTrack = this.currentTrack + 1 >= this.queue.length ? 0 : this.currentTrack + 1;
     this.trackService.carryTrack(this.queue[this.currentTrack]);
     return this.queue[this.currentTrack];
   }
 
-  public previousTrack() {
+  public previousTrack(): Track {
+    this.currentTrack = this.currentTrack - 1 < this.queue.length ? this.queue.length : this.currentTrack - 1;
     this.trackService.carryTrack(this.queue[this.currentTrack]);
     return this.queue[this.currentTrack];
   }

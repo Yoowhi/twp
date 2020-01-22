@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Track} from '../types/helpers';
 import {TorrentFile} from 'webtorrent';
 
@@ -8,9 +8,10 @@ import {TorrentFile} from 'webtorrent';
 export class TrackService {
   trackList: Array<Track>;
 
-  constructor() { }
+  constructor() {
+  }
 
-  public addTracks(files: Array<TorrentFile>) {
+  public addFiles(files: Array<TorrentFile>) {
     files.forEach(((value) => {
       this.trackList.push({
         name: value.name,
@@ -19,7 +20,7 @@ export class TrackService {
     }));
   }
 
-  public removeTracks(files: Array<TorrentFile>) {
+  public removeFiles(files: Array<TorrentFile>) {
     this.trackList = this.trackList.filter((track) => !files.includes(track.file));
   }
 
