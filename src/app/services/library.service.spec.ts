@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TrackService } from './track.service';
+import { LibraryService } from './library.service';
 
 describe('TrackService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: TrackService = TestBed.get(TrackService);
+    const service: LibraryService = TestBed.get(LibraryService);
     expect(service).toBeTruthy();
   });
 });

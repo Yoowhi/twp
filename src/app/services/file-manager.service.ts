@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Torrent, TorrentFile} from 'webtorrent';
 import * as WebTorrent from 'webtorrent';
-import {TrackService} from './track.service';
+import {LibraryService} from './library.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class FileManagerService {
     '.mp3'
   ];
 
-  constructor(private trackService: TrackService) {
+  constructor(private libraryService: LibraryService) {
     this.torrentClient = new WebTorrent();
   }
 
@@ -25,7 +25,7 @@ export class FileManagerService {
         file.deselect();
       });
       const filesToAdd: Array<TorrentFile> = this.filterExtensions(torrent.files);
-      this.trackService.addFiles(filesToAdd);
+      this.libraryService.addFiles(filesToAdd);
     });
   }
 
@@ -33,7 +33,7 @@ export class FileManagerService {
     const torrent = this.torrentClient.get(magnetUri);
     if (torrent) {
       const filesToRemove = this.filterExtensions(torrent.files);
-      this.trackService.removeFiles(filesToRemove);
+      this.libraryService.removeFiles(filesToRemove);
       this.torrentClient.remove(torrent);
     }
   }

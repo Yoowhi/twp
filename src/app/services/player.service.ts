@@ -17,28 +17,30 @@ export class PlayerService {
     this.audioContext = new AudioContext();
   }
 
-  playNext() {
+  public playNext() {
     this.track = this.queueService.nextTrack();
     this.startAudio();
   }
 
-  playPrevious() {
+  public playPrevious() {
     this.track = this.queueService.previousTrack();
     this.startAudio();
   }
 
-  togglePlay() {
+  public togglePlay() {
     this.playing ? this.mediaElement.pause() : this.mediaElement.play();
     this.playing = !this.playing;
   }
 
   private startAudio() {
+    document.getElementById(this.tagID).firstChild.remove();
     this.track.file.appendTo(this.tagID, {
       controls: false
     }, (err, elem) => {
       const mediaSource = this.audioContext.createMediaElementSource(elem);
       mediaSource.connect(this.audioContext.destination);
       elem.onended = () => {
+        mediaSource.disconnect();
         this.playNext(); // Is this a recursion?
       };
       this.mediaElement = elem;

@@ -5,7 +5,7 @@ import {TorrentFile} from 'webtorrent';
 @Injectable({
   providedIn: 'root'
 })
-export class TrackService {
+export class LibraryService {
   trackList: Array<Track>;
 
   constructor() {
