@@ -10,6 +10,12 @@ export class QueueService {
   currentTrack: number;
 
   constructor(private libraryService: LibraryService) {
+    this.applyDefaultQueue();
+  }
+
+  public applyDefaultQueue() {
+    this.queue = this.libraryService.trackList.slice();
+    this.currentTrack = 0;
   }
 
   public setPlaylist(playlist: Playlist) {
@@ -26,7 +32,7 @@ export class QueueService {
   }
 
   public removeTrack(track: Track) {
-    // TODO
+    this.queue.splice(this.queue.indexOf(track), 1);
   }
 
   public nextTrack(): Track {
