@@ -8,7 +8,7 @@ import {LibraryService} from './library.service';
 })
 export class FileManagerService {
   torrentClient: WebTorrent.Instance;
-  allowedExtensions: [
+  allowedExtensions = [
     '.mp3'
   ];
 
@@ -26,6 +26,7 @@ export class FileManagerService {
       });
       const filesToAdd: Array<TorrentFile> = this.filterExtensions(torrent.files);
       this.libraryService.addFiles(filesToAdd);
+      console.log('added');
     });
   }
 

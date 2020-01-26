@@ -9,6 +9,7 @@ export class LibraryService {
   trackList: Array<Track>;
 
   constructor() {
+    this.trackList = new Array<Track>();
   }
 
   public addFiles(files: Array<TorrentFile>) {
