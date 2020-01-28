@@ -7,6 +7,7 @@ import {LibraryService} from './library.service';
   providedIn: 'root'
 })
 export class FileManagerService {
+  torrents: Array<Torrent>;
   torrentClient: WebTorrent.Instance;
   allowedExtensions = [
     '.mp3'
@@ -14,6 +15,7 @@ export class FileManagerService {
 
   constructor(private libraryService: LibraryService) {
     this.torrentClient = new WebTorrent();
+    this.torrents = this.torrentClient.torrents;
   }
 
   public addTorrent(magnetUri) {
@@ -26,7 +28,7 @@ export class FileManagerService {
       });
       const filesToAdd: Array<TorrentFile> = this.filterExtensions(torrent.files);
       this.libraryService.addFiles(filesToAdd);
-      console.log('added');
+      console.log('Torrent ' + torrent.name + ' added');
     });
   }
 
