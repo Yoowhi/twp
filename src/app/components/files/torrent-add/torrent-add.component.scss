@@ -1,0 +1,13 @@
+.add-torrent {
+  padding: 2vh 1vw 0vh 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 0 0 1vw 1vw;
+  background-color: white;
+  box-shadow: 0px 11px 10px 0px rgba(0,0,0,0.2);
+}
+
+.add-torrent * {
+  margin: 0 1vw 0 1vw;
+}
