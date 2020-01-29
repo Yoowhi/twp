@@ -1,0 +1,19 @@
+<mat-spinner *ngIf="!item.ready"></mat-spinner>
+<div *ngIf="item.ready" class="info-container">
+  <mat-tab-group mat-align-tabs="center" style="width: 100%">
+    <mat-tab label="Info">
+      <h1>{{item.progress | percent}}</h1>
+      <h2>{{item.downloaded | filesize}}/{{item.length | filesize}}</h2>
+    </mat-tab>
+    <mat-tab label="Files">
+      <mat-list>
+        <mat-list-item *ngFor="let file of item.files">
+          <div class="info-file">
+            <label>{{file.name}}</label>
+            <mat-progress-bar mode="determinate" [value]="file.progress * 100" class="info-file-progress"></mat-progress-bar>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-tab>
+  </mat-tab-group>
+</div>

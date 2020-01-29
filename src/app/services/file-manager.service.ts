@@ -20,12 +20,7 @@ export class FileManagerService {
 
   public addTorrent(magnetUri) {
     this.torrentClient.add(magnetUri, undefined, (torrent: Torrent) => {
-      // file.deselect() doesn't work properly.
-      // Using workaround from https://github.com/webtorrent/webtorrent/issues/164#issuecomment-248395202
-      torrent.deselect(0, torrent.pieces.length - 1, 0);
-      torrent.files.forEach(file => {
-        file.deselect();
-      });
+      this.pauseTorrent(torrent);
       const filesToAdd: Array<TorrentFile> = this.filterExtensions(torrent.files);
       this.libraryService.addFiles(filesToAdd);
       console.log('Torrent ' + torrent.name + ' added');
@@ -39,6 +34,19 @@ export class FileManagerService {
       this.libraryService.removeFiles(filesToRemove);
       this.torrentClient.remove(torrent);
     }
+  }
+
+  public startTorrent(torrent: Torrent) {
+    torrent.select(0, torrent.pieces.length - 1, 0);
+  }
+
+  public  pauseTorrent(torrent: Torrent) {
+    // file.deselect() doesn't work properly.
+    // Using workaround from https://github.com/webtorrent/webtorrent/issues/164#issuecomment-248395202
+    torrent.deselect(0, torrent.pieces.length - 1, 0);
+    torrent.files.forEach(file => {
+      file.deselect();
+    });
   }
 
   private filterExtensions(files: Array<TorrentFile>) {
