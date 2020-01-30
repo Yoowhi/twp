@@ -2,37 +2,47 @@ import {Injectable} from '@angular/core';
 import {Torrent, TorrentFile} from 'webtorrent';
 import * as WebTorrent from 'webtorrent';
 import {LibraryService} from './library.service';
+import {Source} from '../types/helpers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileManagerService {
-  torrents: Array<Torrent>;
+  sources: Array<Source>;
   torrentClient: WebTorrent.Instance;
-  allowedExtensions = [
+  audioExtensions = [
     '.mp3'
+  ];
+  imageExtensions = [
+    '.png',
+    '.jpg',
+    '.jpeg'
   ];
 
   constructor(private libraryService: LibraryService) {
     this.torrentClient = new WebTorrent();
-    this.torrents = this.torrentClient.torrents;
+    this.sources = new Array<Source>();
   }
 
   public addTorrent(magnetUri) {
     this.torrentClient.add(magnetUri, undefined, (torrent: Torrent) => {
       this.pauseTorrent(torrent);
-      const filesToAdd: Array<TorrentFile> = this.filterExtensions(torrent.files);
-      this.libraryService.addFiles(filesToAdd);
+      const source = this.makeSource(torrent);
+      this.sources.push(source);
+      this.libraryService.addFiles(source.audioFiles);
       console.log('Torrent ' + torrent.name + ' added');
     });
   }
 
   public removeTorrent(magnetUri) {
-    const torrent = this.torrentClient.get(magnetUri);
-    if (torrent) {
-      const filesToRemove = this.filterExtensions(torrent.files);
-      this.libraryService.removeFiles(filesToRemove);
-      this.torrentClient.remove(torrent);
+    const source = this.sources.find(value => value.magnetURI === magnetUri);
+    if (source) {
+      this.libraryService.removeFiles(source.audioFiles);
+      this.sources.splice(this.sources.indexOf(source), 1);
+      this.torrentClient.remove(source);
+      console.log('Torrent ' + source.name + ' removed');
+    } else {
+      console.log('Torrent does not exist');
     }
   }
 
@@ -49,10 +59,10 @@ export class FileManagerService {
     });
   }
 
-  private filterExtensions(files: Array<TorrentFile>) {
+  private filterExtensions(files: Array<TorrentFile>, extensions: Array<string>) {
     const filesToAdd = new Array<TorrentFile>();
     for (const file of files) {
-      for (const ext of this.allowedExtensions) {
+      for (const ext of extensions) {
         if (file.name.endsWith(ext)) {
           filesToAdd.push(file);
           break;
@@ -60,5 +70,19 @@ export class FileManagerService {
       }
     }
     return filesToAdd;
+  }
+
+  private makeSource(torrent: Torrent): Source {
+    const source: Source = torrent as Source;
+    source.audioFiles = this.filterExtensions(torrent.files, this.audioExtensions);
+    const images = this.filterExtensions(torrent.files, this.imageExtensions);
+    if (images.length > 0) {
+      source.cover = images[0];
+    }
+    let audioSize = 0;
+    source.audioFiles.forEach(value => audioSize += value.length);
+    source.audioSize = audioSize;
+    source.progressMultiplier = 1 + ((torrent.length - audioSize) / torrent.length);
+    return source;
   }
 }

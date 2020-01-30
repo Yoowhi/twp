@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Torrent} from 'webtorrent';
 import {FileManagerService} from '../../../services/file-manager.service';
+import {Source} from '../../../types/helpers';
 
 @Component({
   selector: 'app-torrent-info',
@@ -8,7 +9,7 @@ import {FileManagerService} from '../../../services/file-manager.service';
   styleUrls: ['./torrent-info.component.scss']
 })
 export class TorrentInfoComponent implements OnInit {
-  @Input() item: Torrent;
+  @Input() item: Source;
 
   constructor(private fileManagerService: FileManagerService) {
 

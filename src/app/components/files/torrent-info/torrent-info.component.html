@@ -1,13 +1,23 @@
 <mat-spinner *ngIf="!item.ready"></mat-spinner>
-<div *ngIf="item.ready" class="info-container">
+<div *ngIf="item.ready">
   <mat-tab-group mat-align-tabs="center" style="width: 100%">
     <mat-tab label="Info">
-      <h1>{{item.progress | percent}}</h1>
-      <h2>{{item.downloaded | filesize}}/{{item.length | filesize}}</h2>
+      <div class="info-container">
+        <div class="info-element">
+          <mat-list>
+            <mat-list-item>Download speed: {{item.downloadSpeed | filesize}}/s</mat-list-item>
+            <mat-list-item>Peers: {{item.numPeers}}</mat-list-item>
+          </mat-list>
+        </div>
+        <div class="info-element" style="text-align: center">
+          <h1>{{item.progress * item.progressMultiplier | percent}}</h1>
+          <h2>{{item.downloaded | filesize}}/{{item.audioSize | filesize}}</h2>
+        </div>
+      </div>
     </mat-tab>
     <mat-tab label="Files">
       <mat-list>
-        <mat-list-item *ngFor="let file of item.files">
+        <mat-list-item *ngFor="let file of item.audioFiles">
           <div class="info-file">
             <label>{{file.name}}</label>
             <mat-progress-bar mode="determinate" [value]="file.progress * 100" class="info-file-progress"></mat-progress-bar>

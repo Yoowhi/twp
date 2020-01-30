@@ -10,16 +10,16 @@ import {Torrent} from 'webtorrent';
   styleUrls: ['./torrent-dashboard.component.scss']
 })
 export class TorrentDashboardComponent {
-  torrents;
+  sources;
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      return this.torrents;
+      return this.sources;
     })
   );
 
   constructor(private breakpointObserver: BreakpointObserver,
               private fileManagerService: FileManagerService) {
-    this.torrents = this.fileManagerService.torrents;
+    this.sources = this.fileManagerService.sources;
   }
 
   startTorrent(torrent: Torrent) {
