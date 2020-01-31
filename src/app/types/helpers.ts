@@ -8,6 +8,7 @@ export type Playlist = {
 export type Track = {
   name: string,
   file: TorrentFile
+  source: Source
 };
 
 export interface Source extends Torrent {

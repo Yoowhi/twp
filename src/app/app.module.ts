@@ -14,6 +14,7 @@ import { AllTracksComponent } from './components/tracks/all-tracks/all-tracks.co
 import { PlaylistsComponent } from './components/tracks/playlists/playlists.component';
 import {FilesModule} from './components/files/files.module';
 import {TracksModule} from './components/tracks/tracks.module';
+import {MatCardModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {TracksModule} from './components/tracks/tracks.module';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

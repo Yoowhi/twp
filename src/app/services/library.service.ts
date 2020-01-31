@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Playlist, Track} from '../types/helpers';
+import {Playlist, Source, Track} from '../types/helpers';
 import {TorrentFile} from 'webtorrent';
 
 @Injectable({
@@ -8,9 +8,12 @@ import {TorrentFile} from 'webtorrent';
 export class LibraryService {
   trackList: Array<Track>;
   playlists: Array<Playlist>;
+  sourcePlaylists: Array<Playlist>;
 
   constructor() {
     this.trackList = new Array<Track>();
+    this.playlists = new Array<Playlist>();
+    this.sourcePlaylists = new Array<Playlist>();
   }
 
   public addPlaylist(playlistName: string, playlistTracks: Array<Track>) {
@@ -33,20 +36,30 @@ export class LibraryService {
     }
   }
 
-  public addFiles(files: Array<TorrentFile>) {
-    files.forEach(((value) => {
-      this.trackList.push({
-        name: value.name.substring(0, value.name.lastIndexOf('.')),
-        file: value
-      });
-    }));
+  public addSource(source: Source) {
+    const newTracks = this.makeTracks(source);
+    this.sourcePlaylists.push({name: source.name, tracks: newTracks});
+    newTracks.forEach(value => this.trackList.push(value));
   }
 
-  public removeFiles(files: Array<TorrentFile>) {
-    this.trackList = this.trackList.filter((track) => !files.includes(track.file));
+  public removeSource(source: Source) {
+    this.trackList = this.trackList.filter((track) => !source.files.includes(track.file));
+    this.sourcePlaylists = this.sourcePlaylists.filter(value => value.tracks[0].source.name !== source.name);
   }
 
   public carryTrack(track: Track) {
     // TODO Start download, increase priority, etc.
+  }
+
+  private makeTracks(newSource: Source) {
+    const tracks = [];
+    newSource.audioFiles.forEach(((value) => {
+      tracks.push({
+        name: value.name.substring(0, value.name.lastIndexOf('.')),
+        file: value,
+        source: newSource
+      });
+    }));
+    return tracks;
   }
 }

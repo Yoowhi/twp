@@ -29,7 +29,7 @@ export class FileManagerService {
       this.pauseTorrent(torrent);
       const source = this.makeSource(torrent);
       this.sources.push(source);
-      this.libraryService.addFiles(source.audioFiles);
+      this.libraryService.addSource(source);
       console.log('Torrent ' + torrent.name + ' added');
     });
   }
@@ -37,7 +37,7 @@ export class FileManagerService {
   public removeTorrent(magnetUri) {
     const source = this.sources.find(value => value.magnetURI === magnetUri);
     if (source) {
-      this.libraryService.removeFiles(source.audioFiles);
+      this.libraryService.removeSource(source);
       this.sources.splice(this.sources.indexOf(source), 1);
       this.torrentClient.remove(source);
       console.log('Torrent ' + source.name + ' removed');

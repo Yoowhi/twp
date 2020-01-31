@@ -1,1 +1,13 @@
-<p>playlists works!</p>
+<div class="playlists-area">
+
+</div>
+<h1>Sources</h1>
+<div class="playlists-area">
+  <div class="playlist" *ngFor="let playlist of sourcePlaylists">
+    <mat-card>
+      <mat-card-header>
+        {{playlist.name}}
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>

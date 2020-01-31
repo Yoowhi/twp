@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LibraryService} from '../../../services/library.service';
+import {Playlist} from '../../../types/helpers';
 
 @Component({
   selector: 'app-playlists',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./playlists.component.scss']
 })
 export class PlaylistsComponent implements OnInit {
+  sourcePlaylists: Array<Playlist>;
 
-  constructor() { }
+  constructor(private libraryService: LibraryService) {
+    this.sourcePlaylists = libraryService.sourcePlaylists;
+  }
 
   ngOnInit() {
   }
