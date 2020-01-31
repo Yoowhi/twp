@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { AllTracksComponent } from './components/tracks/all-tracks/all-tracks.component';
 import { PlaylistsComponent } from './components/tracks/playlists/playlists.component';
 import {FilesModule} from './components/files/files.module';
+import {TracksModule} from './components/tracks/tracks.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {FilesModule} from './components/files/files.module';
     BrowserModule,
     AppRoutesModule,
     FilesModule,
+    TracksModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
