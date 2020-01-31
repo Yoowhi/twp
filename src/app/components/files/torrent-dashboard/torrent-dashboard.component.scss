@@ -8,6 +8,8 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .more-button {
@@ -18,4 +20,9 @@
 
 .dashboard-card-content {
   text-align: left;
+  flex-grow: 1;
+}
+
+.dashboard-card-header {
+  flex-shrink: 0;
 }

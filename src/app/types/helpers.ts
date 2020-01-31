@@ -13,7 +13,7 @@ export type Track = {
 
 export interface Source extends Torrent {
   audioFiles: Array<TorrentFile>;
-  cover: TorrentFile;
+  covers: Array<TorrentFile>;
   audioSize: number;
   progressMultiplier: number;
 }

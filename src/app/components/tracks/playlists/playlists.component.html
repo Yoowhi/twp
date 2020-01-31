@@ -1,13 +1,32 @@
 <div class="playlists-area">
 
 </div>
-<h1>Sources</h1>
-<div class="playlists-area">
-  <div class="playlist" *ngFor="let playlist of sourcePlaylists">
-    <mat-card>
-      <mat-card-header>
-        {{playlist.name}}
+<h1 class="mat-display-2">Sources</h1>
+<mat-grid-list cols="4" rowHeight="320">
+  <mat-grid-tile *ngFor="let playlist of sourcePlaylists">
+    <mat-card class="card">
+      <mat-card-header class="card-header">
+        <mat-card-title>
+          {{playlist.name}}
+          <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>Delete</button>
+          </mat-menu>
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{playlist.tracks.length}} tracks
+        </mat-card-subtitle>
       </mat-card-header>
+      <mat-card-content class="card-content">
+        <p>{{playlist.tracks.length}} tracks</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button>
+          <mat-icon>playlist_play</mat-icon>
+        </button>
+      </mat-card-actions>
     </mat-card>
-  </div>
-</div>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TorrentInfoComponent } from './torrent-info/torrent-info.component';
 import {NgxFilesizeModule} from 'ngx-filesize';
+import {ClipboardModule} from 'ngx-clipboard';
 
 
 
@@ -30,6 +31,7 @@ import {NgxFilesizeModule} from 'ngx-filesize';
     TorrentInfoComponent
   ],
   imports: [
+    ClipboardModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,

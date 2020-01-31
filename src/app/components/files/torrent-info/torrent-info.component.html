@@ -7,6 +7,9 @@
           <mat-list>
             <mat-list-item>Download speed: {{item.downloadSpeed | filesize}}/s</mat-list-item>
             <mat-list-item>Peers: {{item.numPeers}}</mat-list-item>
+            <mat-list-item>Files: {{item.files.length}}</mat-list-item>
+            <mat-list-item>Audio Files: {{item.audioFiles.length}}</mat-list-item>
+            <mat-list-item>Covers: {{item.covers.length}}</mat-list-item>
           </mat-list>
         </div>
         <div class="info-element" style="text-align: center">
@@ -16,8 +19,9 @@
       </div>
     </mat-tab>
     <mat-tab label="Files">
+<!--      TODO Make scroll-->
       <mat-list>
-        <mat-list-item *ngFor="let file of item.audioFiles">
+        <mat-list-item *ngFor="let file of item.files">
           <div class="info-file">
             <label>{{file.name}}</label>
             <mat-progress-bar mode="determinate" [value]="file.progress * 100" class="info-file-progress"></mat-progress-bar>

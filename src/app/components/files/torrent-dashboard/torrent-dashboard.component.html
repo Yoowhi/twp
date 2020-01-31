@@ -2,17 +2,17 @@
   <mat-grid-list cols="2" rowHeight="410px">
     <mat-grid-tile *ngFor="let source of cards | async" [colspan]="1" [rowspan]="1">
       <mat-card class="dashboard-card">
-        <mat-card-header>
+        <mat-card-header class="dashboard-card-header">
           <mat-card-title>
             {{source.name}}
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item (click)="removeTorrent(source.magnetURI)">Remove</button>
               <button mat-menu-item (click)="startTorrent(source)">Download all</button>
               <button mat-menu-item (click)="pauseTorrent(source)">Pause all</button>
+              <button mat-menu-item (click)="removeTorrent(source.magnetURI)">Remove</button>
+              <button mat-menu-item ngxClipboard [cbContent]="source.magnetURI">Copy Magnet Link</button>
             </mat-menu>
           </mat-card-title>
         </mat-card-header>

@@ -77,7 +77,7 @@ export class FileManagerService {
     source.audioFiles = this.filterExtensions(torrent.files, this.audioExtensions);
     const images = this.filterExtensions(torrent.files, this.imageExtensions);
     if (images.length > 0) {
-      source.cover = images[0];
+      source.covers = images;
     }
     let audioSize = 0;
     source.audioFiles.forEach(value => audioSize += value.length);

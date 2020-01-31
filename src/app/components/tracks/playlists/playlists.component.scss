@@ -7,3 +7,27 @@
   height: 240px;
   width: 320px;
 }
+
+.card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  flex-shrink: 0;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
