@@ -11,9 +11,9 @@ import {Torrent} from 'webtorrent';
 })
 export class TorrentDashboardComponent {
   sources;
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  break = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      return this.sources;
+      return matches;
     })
   );
 

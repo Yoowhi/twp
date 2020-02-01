@@ -1,11 +1,6 @@
-.playlists-area {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.playlist {
-  height: 240px;
-  width: 320px;
+.group-name {
+  padding: 10vh 0 0 5vw;
+  color: #0c77e8;
 }
 
 .card {
@@ -18,16 +13,25 @@
   flex-direction: column;
 }
 
-.card-header {
-  flex-shrink: 0;
+.card-image {
+  flex-grow: 1;
+  background: rgb(54,244,180);
+  background: radial-gradient(circle, rgba(54,244,180,1) 0%, rgba(57,255,141,1) 100%);
 }
 
-.card-content {
-  flex-grow: 1;
+.card-header {
+  flex-shrink: 0;
 }
 
 .more-button {
   position: absolute;
   top: 5px;
   right: 10px;
+}
+
+.no-playlists {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

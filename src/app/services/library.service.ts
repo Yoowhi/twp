@@ -8,16 +8,14 @@ import {TorrentFile} from 'webtorrent';
 export class LibraryService {
   trackList: Array<Track>;
   playlists: Array<Playlist>;
-  sourcePlaylists: Array<Playlist>;
 
   constructor() {
     this.trackList = new Array<Track>();
     this.playlists = new Array<Playlist>();
-    this.sourcePlaylists = new Array<Playlist>();
   }
 
   public addPlaylist(playlistName: string, playlistTracks: Array<Track>) {
-    this.playlists.push({ name: playlistName, tracks: playlistTracks });
+    this.playlists.push({ name: playlistName, tracks: playlistTracks, generated: false });
   }
 
   public removePlaylist(playlist: Playlist) {
@@ -38,17 +36,31 @@ export class LibraryService {
 
   public addSource(source: Source) {
     const newTracks = this.makeTracks(source);
-    this.sourcePlaylists.push({name: source.name, tracks: newTracks});
+    this.playlists.push({ name: source.name, tracks: newTracks, generated: true });
     newTracks.forEach(value => this.trackList.push(value));
   }
 
   public removeSource(source: Source) {
     this.trackList = this.trackList.filter((track) => !source.files.includes(track.file));
-    this.sourcePlaylists = this.sourcePlaylists.filter(value => value.tracks[0].source.name !== source.name);
+    this.playlists = this.playlists.filter(value => !(value.generated === true && value.tracks[0].source.name === source.name));
   }
 
   public carryTrack(track: Track) {
     // TODO Start download, increase priority, etc.
+  }
+
+  public getCovers(playlist: Playlist) {
+    let covers: Array<TorrentFile> = new Array<TorrentFile>();
+    const sources: Array<Source> = new Array<Source>();
+    for (const track of playlist.tracks) {
+      if (!sources.includes(track.source)) {
+        sources.push(track.source);
+      }
+    }
+    for (const source of sources) {
+      covers = [...covers, ...source.covers];
+    }
+    return covers;
   }
 
   private makeTracks(newSource: Source) {

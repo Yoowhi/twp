@@ -5,6 +5,9 @@
 
 .info-element {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .info-file {

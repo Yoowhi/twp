@@ -2,7 +2,8 @@ import {Torrent, TorrentFile} from 'webtorrent';
 
 export type Playlist = {
   name: string,
-  tracks: Array<Track>
+  tracks: Array<Track>,
+  generated: boolean
 };
 
 export type Track = {
