@@ -10,10 +10,13 @@ import {LibraryService} from '../../../services/library.service';
 })
 export class TrackListComponent implements OnInit {
   @Input() trackList: Array<Track>;
+  trackChecks: Array<boolean>;
 
   constructor() { }
 
   ngOnInit() {
+    this.trackChecks = new Array<boolean>();
+    this.trackList.forEach(value => this.trackChecks.push(false));
   }
 
 }

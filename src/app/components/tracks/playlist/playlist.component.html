@@ -1,2 +1,14 @@
-<h1 class="mat-display-2">{{playlist.name}}</h1>
-<app-track-list [trackList]="playlist.tracks"></app-track-list>
+<div class="area-title">
+  <h1 class="mat-display-2">{{playlist.name}}</h1>
+</div>
+
+<mat-card class="track-list">
+  <mat-card-header>
+    <mat-card-title>
+      {{playlist.tracks.length}} tracks
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-track-list [trackList]="playlist.tracks"></app-track-list>
+  </mat-card-content>
+</mat-card>

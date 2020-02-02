@@ -1,5 +1,11 @@
 <mat-list>
-  <mat-list-item *ngFor="let track of trackList">
-    {{track.name}}
+  <mat-list-item class="list-item" *ngFor="let track of trackList; index as i;" [class.list-item-checked]="trackChecks[i]">
+    <mat-divider *ngIf="i < trackList.length - 1"></mat-divider>
+    <div class="track">
+      <div class="checkbox-area" [class.checkbox-checked]="trackChecks[i]">
+        <mat-checkbox [(ngModel)]="trackChecks[i]" [checked]="trackChecks[i]"></mat-checkbox>
+      </div>
+      <span>{{track.name}}</span>
+    </div>
   </mat-list-item>
 </mat-list>

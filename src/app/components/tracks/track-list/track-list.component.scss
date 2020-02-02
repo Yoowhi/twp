@@ -1,0 +1,28 @@
+.list-item:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.list-item-checked {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vw;
+  opacity: 0;
+}
+
+.list-item:hover .checkbox-area {
+  opacity: 1;
+}
+
+.checkbox-checked {
+  opacity: 1 !important;
+}

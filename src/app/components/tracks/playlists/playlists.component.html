@@ -1,5 +1,5 @@
 <ng-container *ngIf="hasUserPlaylists()">
-  <div class="group-name">
+  <div class="area-title">
     <h1 class="mat-display-2">My Playlists</h1>
   </div>
   <mat-grid-list cols="4" rowHeight="380">
@@ -10,12 +10,6 @@
           <mat-card-header>
             <mat-card-title>
               {{playlist.name}}
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Delete</button>
-              </mat-menu>
             </mat-card-title>
             <mat-card-subtitle>
               {{playlist.tracks.length}} tracks
@@ -33,7 +27,7 @@
 </ng-container>
 
 <ng-container *ngIf="hasAutoPlaylists()">
-  <div class="group-name">
+  <div class="area-title">
     <h1 class="mat-display-2">Auto Playlists</h1>
   </div>
   <mat-grid-list cols="4" rowHeight="380">

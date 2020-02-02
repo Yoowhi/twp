@@ -21,14 +21,13 @@ export class FileManagerService {
 
   constructor(private libraryService: LibraryService) {
     this.torrentClient = new WebTorrent();
-    this.sources = new Array<Source>();
+    this.sources = this.torrentClient.torrents as Array<Source>;
   }
 
   public addTorrent(magnetUri) {
     this.torrentClient.add(magnetUri, undefined, (torrent: Torrent) => {
       this.pauseTorrent(torrent);
       const source = this.makeSource(torrent);
-      this.sources.push(source);
       this.libraryService.addSource(source);
       console.log('Torrent ' + torrent.name + ' added');
     });
