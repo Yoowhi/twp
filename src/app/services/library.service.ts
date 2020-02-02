@@ -14,7 +14,7 @@ export class LibraryService {
     this.playlists = new Array<Playlist>();
   }
 
-  public addPlaylist(playlistName: string, playlistTracks: Array<Track>) {
+  public createPlaylist(playlistName: string, playlistTracks: Array<Track>) {
     this.playlists.push({ name: playlistName, tracks: playlistTracks, generated: false });
   }
 
@@ -22,9 +22,11 @@ export class LibraryService {
     this.playlists.splice(this.playlists.indexOf(playlist), 1);
   }
 
-  public addTrackToPlaylist(track: Track, playlist: Playlist) {
-    if (playlist.tracks.indexOf(track) !== -1) {
-      playlist.tracks.push(track);
+  public addTracksToPlaylist(tracks: Array<Track>, playlist: Playlist) {
+    for (const track of tracks) {
+      if (playlist.tracks.indexOf(track) !== -1) {
+        playlist.tracks.push(track);
+      }
     }
   }
 

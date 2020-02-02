@@ -1,33 +1,35 @@
-<mat-spinner *ngIf="!item.ready"></mat-spinner>
-<div *ngIf="item.ready">
-  <mat-tab-group mat-align-tabs="center" style="width: 100%">
-    <mat-tab label="Info">
-      <div class="info-container">
-        <div class="info-element">
-          <mat-list>
-            <mat-list-item>Download speed: {{item.downloadSpeed | filesize}}/s</mat-list-item>
-            <mat-list-item>Peers: {{item.numPeers}}</mat-list-item>
-            <mat-list-item>Files: {{item.files.length}}</mat-list-item>
-            <mat-list-item>Audio Files: {{item.audioFiles.length}}</mat-list-item>
-            <mat-list-item>Covers: {{item.covers.length}}</mat-list-item>
-          </mat-list>
-        </div>
-        <div class="info-element" style="text-align: center">
-          <h1>{{item.progress * item.progressMultiplier | percent}}</h1>
-          <h2>{{item.downloaded | filesize}}/{{item.audioSize | filesize}}</h2>
-        </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Files">
-<!--      TODO Make scroll-->
-      <mat-list>
-        <mat-list-item *ngFor="let file of item.files">
-          <div class="info-file">
-            <label>{{file.name}}</label>
-            <mat-progress-bar mode="determinate" [value]="file.progress * 100" class="info-file-progress"></mat-progress-bar>
+<ng-container [ngSwitch]="item.ready">
+  <mat-spinner *ngSwitchDefault></mat-spinner>
+  <div *ngSwitchCase="true">
+    <mat-tab-group mat-align-tabs="center" style="width: 100%">
+      <mat-tab label="Info">
+        <div class="info-container">
+          <div class="info-element">
+            <mat-list>
+              <mat-list-item>Download speed: {{item.downloadSpeed | filesize}}/s</mat-list-item>
+              <mat-list-item>Peers: {{item.numPeers}}</mat-list-item>
+              <mat-list-item>Files: {{item.files.length}}</mat-list-item>
+              <mat-list-item>Audio Files: {{item.audioFiles.length}}</mat-list-item>
+              <mat-list-item>Covers: {{item.covers.length}}</mat-list-item>
+            </mat-list>
           </div>
-        </mat-list-item>
-      </mat-list>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+          <div class="info-element" style="text-align: center">
+            <h1>{{item.progress * item.progressMultiplier | percent}}</h1>
+            <h2>{{item.downloaded | filesize}}/{{item.audioSize | filesize}}</h2>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Files">
+        <!--      TODO Make scroll-->
+        <mat-list>
+          <mat-list-item *ngFor="let file of item.files">
+            <div class="info-file">
+              <label>{{file.name}}</label>
+              <mat-progress-bar mode="determinate" [value]="file.progress * 100" class="info-file-progress"></mat-progress-bar>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-container>

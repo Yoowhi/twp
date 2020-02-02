@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Track} from '../../../types/helpers';
 import {ActivatedRoute} from '@angular/router';
 import {LibraryService} from '../../../services/library.service';
+import {TracklistService} from '../../../services/tracklist.service';
 
 @Component({
   selector: 'app-track-list',
@@ -12,11 +13,12 @@ export class TrackListComponent implements OnInit {
   @Input() trackList: Array<Track>;
   trackChecks: Array<boolean>;
 
-  constructor() { }
+  constructor(private tracklistService: TracklistService) { }
 
   ngOnInit() {
-    this.trackChecks = new Array<boolean>();
-    this.trackList.forEach(value => this.trackChecks.push(false));
+    this.tracklistService.init(this.trackList);
+    this.trackChecks = this.tracklistService.trackChecks;
   }
+
 
 }

@@ -34,4 +34,8 @@ export class PlaylistsComponent implements OnInit {
   openPlaylist(i) {
     this.router.navigate(['tracks', 'playlist', i]);
   }
+
+  removePlaylist(playlist: Playlist) {
+    this.libraryService.removePlaylist(playlist);
+  }
 }

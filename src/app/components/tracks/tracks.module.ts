@@ -12,11 +12,12 @@ import {
   MatMenuModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
+import { TracklistControlsComponent } from './tracklist-controls/tracklist-controls.component';
 
 
 
 @NgModule({
-  declarations: [PlaylistComponent, TrackListComponent],
+  declarations: [PlaylistComponent, TrackListComponent, TracklistControlsComponent],
   exports: [
   ],
   imports: [

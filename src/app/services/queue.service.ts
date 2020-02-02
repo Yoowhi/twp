@@ -18,21 +18,16 @@ export class QueueService {
     this.currentTrack = 0;
   }
 
-  public setPlaylist(playlist: Playlist) {
-    this.queue = [...playlist.tracks]; // Duplicate
-    this.currentTrack = 0;
+  public setQueue(trackList: Array<Track>) {
+    this.queue = trackList.slice();
   }
 
-  public addPlaylist(playlist: Playlist) {
-    this.queue = [...this.queue, ...playlist.tracks];
+  public addToQueue(trackList: Array<Track>) {
+    this.queue = [...this.queue, ...trackList];
   }
 
-  public addTrack(track: Track) {
-    this.queue.push(track);
-  }
-
-  public removeTrack(track: Track) {
-    this.queue.splice(this.queue.indexOf(track), 1);
+  public removeFromQueue(trackList: Array<Track>) {
+    trackList.forEach(value => this.queue.splice(this.queue.indexOf(value), 1));
   }
 
   public nextTrack(): Track {
