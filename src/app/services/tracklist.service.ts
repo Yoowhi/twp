@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Playlist, Track} from '../types/helpers';
 import {LibraryService} from './library.service';
 import {QueueService} from './queue.service';
+import {PlayerService} from './player.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class TracklistService {
   }
 
   constructor(private libraryService: LibraryService,
-              private queueService: QueueService) { }
+              private queueService: QueueService,
+              private playerService: PlayerService) { }
 
   public init(trackList: Array<Track>) {
     this.trackList = trackList;
@@ -25,6 +27,7 @@ export class TracklistService {
 
   public playTrackList(startIndex: number = 0) {
     this.queueService.setQueue(this.checkedTracks, startIndex);
+    this.playerService.togglePlay();
     this.init(this.trackList);
   }
 

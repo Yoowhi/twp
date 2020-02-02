@@ -9,7 +9,6 @@ export class PlayerService {
   track: Track;
   playing: boolean;
   audioContext: AudioContext;
-  tagID;
   mediaElement: HTMLMediaElement;
 
 
@@ -27,14 +26,22 @@ export class PlayerService {
     this.startAudio();
   }
 
+  play() {
+    if (!this.track) {
+      this.track = this.queueService.queue[this.queueService.currentTrack];
+    }
+    this.playing = true;
+    this.startAudio();
+    this.mediaElement.play();
+  }
+
   public togglePlay() {
     this.playing ? this.mediaElement.pause() : this.mediaElement.play();
     this.playing = !this.playing;
   }
 
   private startAudio() {
-    document.getElementById(this.tagID).firstChild.remove();
-    this.track.file.appendTo(this.tagID, {
+    this.track.file.renderTo(this.mediaElement, {
       controls: false
     }, (err, elem) => {
       const mediaSource = this.audioContext.createMediaElementSource(elem);
@@ -43,7 +50,6 @@ export class PlayerService {
         mediaSource.disconnect();
         this.playNext(); // Is this a recursion?
       };
-      this.mediaElement = elem;
     });
   }
 }

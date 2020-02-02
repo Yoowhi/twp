@@ -11,6 +11,7 @@ export class PlayerPanelComponent implements OnInit {
   constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
+    this.playerService.mediaElement = document.getElementById('audiotag') as HTMLMediaElement;
   }
 
   playNext() {

@@ -16,7 +16,7 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="dashboard-card-content" [class.waiting]="!source.ready">
           <app-torrent-info [item]="source"></app-torrent-info>
         </mat-card-content>
       </mat-card>
