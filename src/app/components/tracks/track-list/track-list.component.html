@@ -5,7 +5,9 @@
       <div class="checkbox-area" [class.checkbox-checked]="trackChecks[i]">
         <mat-checkbox [(ngModel)]="trackChecks[i]" [checked]="trackChecks[i]"></mat-checkbox>
       </div>
-      <span>{{track.name}}</span>
+      <div class="trackname-area" (click)="playFromId(i)">
+        <span>{{track.name}}</span>
+      </div>
     </div>
   </mat-list-item>
 </mat-list>

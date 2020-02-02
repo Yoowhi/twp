@@ -9,6 +9,7 @@ import {TracklistService} from '../../../services/tracklist.service';
 export class TracklistControlsComponent implements OnInit {
   @Input() editable: boolean;
   @Input() iconsOnly: boolean;
+  @Input() queueEdit: boolean;
 
   constructor(private tracklistService: TracklistService) { }
 

@@ -9,6 +9,7 @@
 .track {
   display: flex;
   align-items: center;
+  flex-grow: 1;
 }
 
 .checkbox-area {
@@ -17,6 +18,13 @@
   align-items: center;
   margin: 1vw;
   opacity: 0;
+}
+
+.trackname-area {
+  flex-grow: 1;
+  align-self: normal;
+  display: flex;
+  align-items: center;
 }
 
 .list-item:hover .checkbox-area {

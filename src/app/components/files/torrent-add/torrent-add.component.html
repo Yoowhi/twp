@@ -2,5 +2,5 @@
   <mat-form-field style="flex-grow: 2">
     <input matInput placeholder="Magnet URI" [(ngModel)]="magnetUri">
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="addMagnet()">Add Magnet</button>
+  <button mat-raised-button color="primary" (click)="addMagnet()" [disabled]="!magnetUri">Add Magnet</button>
 </div>

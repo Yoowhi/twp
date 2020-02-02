@@ -20,5 +20,7 @@ export class TrackListComponent implements OnInit {
     this.trackChecks = this.tracklistService.trackChecks;
   }
 
-
+  playFromId(id: number) {
+    this.tracklistService.playTrackList(id);
+  }
 }

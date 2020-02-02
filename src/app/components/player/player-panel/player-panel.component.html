@@ -1,0 +1,20 @@
+<button mat-icon-button class="play-element" [disabled]="!playerService.track">
+  <mat-icon>
+    skip_previous
+  </mat-icon>
+</button>
+<button mat-icon-button class="play-element play-button" (click)="togglePlay()" [disabled]="!playerService.track">
+  <ng-container [ngSwitch]="playerService.playing">
+    <mat-icon *ngSwitchCase="true">
+      pause_circle_filled
+    </mat-icon>
+    <mat-icon *ngSwitchDefault>
+      play_circle_filled
+    </mat-icon>
+  </ng-container>
+</button>
+<button mat-icon-button class="play-element" (click)="playNext()" [disabled]="!playerService.track">
+  <mat-icon>
+    skip_next
+  </mat-icon>
+</button>

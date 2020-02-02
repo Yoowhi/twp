@@ -17,3 +17,16 @@
   margin-right: 3vw;
   transform: scale(2);
 }
+
+.player-panel {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  height: 64px;
+  background-color: white;
+  width: 100vw;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.58);
+  z-index: 10;
+}

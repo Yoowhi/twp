@@ -1,16 +1,16 @@
 <ng-container [ngSwitch]="iconsOnly">
   <ng-container *ngSwitchCase="true">
-    <button mat-icon-button color="accent" aria-label="Play" (click)="playTrackList()"><mat-icon>playlist_play</mat-icon></button>
-    <button mat-icon-button color="" aria-label="Add to Queue" (click)="addToQueue()"><mat-icon>playlist_add</mat-icon></button>
+    <button *ngIf="queueEdit" mat-icon-button color="accent" aria-label="Play" (click)="playTrackList()"><mat-icon>playlist_play</mat-icon></button>
+    <button *ngIf="queueEdit" mat-icon-button color="" aria-label="Add to Queue" (click)="addToQueue()"><mat-icon>playlist_add</mat-icon></button>
     <button mat-icon-button color="" aria-label="Add to Playlist" (click)="addToPlaylist()"><mat-icon>library-add</mat-icon></button>
     <button mat-icon-button color="accent" aria-label="Create Playlist" (click)="createPlaylist()"><mat-icon>library_music</mat-icon></button>
-    <button mat-icon-button color="warn" *ngIf="editable" aria-label="Remove" (click)="removeTracks()"><mat-icon>delete</mat-icon></button>
+    <button *ngIf="editable" mat-icon-button color="warn" aria-label="Remove" (click)="removeTracks()"><mat-icon>delete</mat-icon></button>
   </ng-container>
   <ng-container *ngSwitchDefault>
-    <button mat-button color="accent" (click)="playTrackList()"><mat-icon>playlist_play</mat-icon>Play</button>
-    <button mat-button color="" (click)="addToQueue()"><mat-icon>playlist_add</mat-icon>Add to Queue</button>
+    <button *ngIf="queueEdit" mat-button color="accent" (click)="playTrackList()"><mat-icon>playlist_play</mat-icon>Play</button>
+    <button *ngIf="queueEdit" mat-button color="" (click)="addToQueue()"><mat-icon>playlist_add</mat-icon>Add to Queue</button>
     <button mat-button color="" (click)="addToPlaylist()"><mat-icon>library-add</mat-icon>Add to Playlist</button>
     <button mat-button color="accent" (click)="createPlaylist()"><mat-icon>library_music</mat-icon>Create Playlist</button>
-    <button mat-button color="warn" *ngIf="editable" (click)="removeTracks()"><mat-icon>delete</mat-icon>Remove</button>
+    <button *ngIf="editable" mat-button color="warn" (click)="removeTracks()"><mat-icon>delete</mat-icon>Remove</button>
   </ng-container>
 </ng-container>

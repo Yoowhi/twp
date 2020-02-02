@@ -16,7 +16,7 @@
     <mat-card-subtitle>{{playlist.tracks.length}} tracks</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <app-tracklist-controls class="controls" [editable]="!playlist.generated" [iconsOnly]="false"></app-tracklist-controls>
+    <app-tracklist-controls class="controls" [queueEdit]="true" [editable]="!playlist.generated" [iconsOnly]="false"></app-tracklist-controls>
     <app-track-list [trackList]="playlist.tracks"></app-track-list>
   </mat-card-content>
 </mat-card>

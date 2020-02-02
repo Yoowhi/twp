@@ -15,6 +15,7 @@ import { PlaylistsComponent } from './components/tracks/playlists/playlists.comp
 import {FilesModule} from './components/files/files.module';
 import {TracksModule} from './components/tracks/tracks.module';
 import {MatCardModule, MatGridListModule, MatMenuModule} from '@angular/material';
+import {PlayerModule} from './components/player/player.module';
 
 @NgModule({
   declarations: [
@@ -22,22 +23,23 @@ import {MatCardModule, MatGridListModule, MatMenuModule} from '@angular/material
     AllTracksComponent,
     PlaylistsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutesModule,
-    FilesModule,
-    TracksModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    MatGridListModule,
-    MatMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutesModule,
+        FilesModule,
+        TracksModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatCardModule,
+        MatGridListModule,
+        MatMenuModule,
+        PlayerModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

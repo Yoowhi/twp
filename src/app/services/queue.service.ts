@@ -18,8 +18,9 @@ export class QueueService {
     this.currentTrack = 0;
   }
 
-  public setQueue(trackList: Array<Track>) {
-    this.queue = trackList.slice();
+  public setQueue(trackList: Array<Track>, startIndex) {
+    this.queue = trackList;
+    this.currentTrack = startIndex;
   }
 
   public addToQueue(trackList: Array<Track>) {

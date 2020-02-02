@@ -23,8 +23,8 @@ export class TracklistService {
     this.trackList.forEach(value => this.trackChecks.push(false));
   }
 
-  public playTrackList() {
-    this.queueService.setQueue(this.checkedTracks);
+  public playTrackList(startIndex: number = 0) {
+    this.queueService.setQueue(this.checkedTracks, startIndex);
     this.init(this.trackList);
   }
 
@@ -51,4 +51,6 @@ export class TracklistService {
     }
     this.init(this.trackList);
   }
+
+
 }
