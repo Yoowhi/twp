@@ -48,7 +48,7 @@ export class LibraryService {
   }
 
   public carryTrack(track: Track) {
-    // TODO Start download, increase priority, etc.
+    track.file.select();
   }
 
   public getCovers(playlist: Playlist) {

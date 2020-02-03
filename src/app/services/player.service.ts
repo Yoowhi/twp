@@ -27,17 +27,27 @@ export class PlayerService {
   }
 
   play() {
-    if (!this.track) {
+    if (this.queueService.queue.length > 0) {
       this.track = this.queueService.queue[this.queueService.currentTrack];
+      if (this.track) {
+        this.playing = true;
+        this.startAudio();
+        this.mediaElement.play();
+      } else {
+        console.log('Current track mistake');
+      }
+    } else {
+      console.log('Queue is empty');
     }
-    this.playing = true;
-    this.startAudio();
-    this.mediaElement.play();
   }
 
   public togglePlay() {
-    this.playing ? this.mediaElement.pause() : this.mediaElement.play();
-    this.playing = !this.playing;
+    if (this.track) {
+      this.playing ? this.mediaElement.pause() : this.mediaElement.play();
+      this.playing = !this.playing;
+    } else {
+      this.play();
+    }
   }
 
   private startAudio() {
@@ -48,7 +58,6 @@ export class PlayerService {
       mediaSource.connect(this.audioContext.destination);
       elem.onended = () => {
         mediaSource.disconnect();
-        this.playNext(); // Is this a recursion?
       };
     });
   }

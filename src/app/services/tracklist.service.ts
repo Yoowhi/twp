@@ -12,7 +12,10 @@ export class TracklistService {
   trackChecks: Array<boolean>;
 
   get checkedTracks() {
-    return this.trackList.filter((value, index) => this.trackChecks[index]);
+    const checks = this.trackList.filter((value, index) => this.trackChecks[index]);
+    if (checks.length === 0) {
+      return this.trackList;
+    }
   }
 
   constructor(private libraryService: LibraryService,
