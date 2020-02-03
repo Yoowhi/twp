@@ -1,10 +1,10 @@
 <audio id="audiotag"></audio>
-<button mat-icon-button class="play-element" (click)="playPrevious()">
+<button mat-icon-button class="play-element" (click)="playPrevious()" [disabled]="!playerService.currentTrack">
   <mat-icon>
     skip_previous
   </mat-icon>
 </button>
-<button mat-icon-button class="play-element play-button" (click)="togglePlay()">
+<button mat-icon-button class="play-element play-button" (click)="togglePlay()" [disabled]="!playerService.currentTrack">
   <ng-container [ngSwitch]="playerService.playing">
     <mat-icon *ngSwitchCase="true">
       pause_circle_filled
@@ -14,7 +14,7 @@
     </mat-icon>
   </ng-container>
 </button>
-<button mat-icon-button class="play-element" (click)="playNext()">
+<button mat-icon-button class="play-element" (click)="playNext()" [disabled]="!playerService.currentTrack">
   <mat-icon>
     skip_next
   </mat-icon>

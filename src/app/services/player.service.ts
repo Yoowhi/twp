@@ -6,10 +6,14 @@ import {Track} from '../types/helpers';
   providedIn: 'root'
 })
 export class PlayerService {
-  track: Track;
+  currentTrack: Track;
+  nextTrack: Track;
+  previousTrack: Track;
+
   playing: boolean;
   audioContext: AudioContext;
   mediaElement: HTMLMediaElement;
+  mediaSource: MediaElementAudioSourceNode;
 
 
   constructor(private queueService: QueueService) {
@@ -17,22 +21,23 @@ export class PlayerService {
   }
 
   public playNext() {
-    this.track = this.queueService.nextTrack();
-    this.startAudio();
+    this.currentTrack = this.queueService.getNextTrack();
+    this.play();
   }
 
   public playPrevious() {
-    this.track = this.queueService.previousTrack();
-    this.startAudio();
+    this.currentTrack = this.queueService.getPreviousTrack();
+    this.play();
   }
 
-  play() {
+  public play() {
     if (this.queueService.queue.length > 0) {
-      this.track = this.queueService.queue[this.queueService.currentTrack];
-      if (this.track) {
+      this.currentTrack = this.queueService.queue[this.queueService.currentId];
+      if (this.currentTrack) {
         this.playing = true;
         this.startAudio();
         this.mediaElement.play();
+        this.updateTracks();
       } else {
         console.log('Current track mistake');
       }
@@ -41,24 +46,35 @@ export class PlayerService {
     }
   }
 
+  public stop() {
+    this.playing = false;
+    this.currentTrack = null;
+    this.mediaElement.pause();
+    this.mediaSource.disconnect();
+    console.log('Playing stopped');
+  }
+
   public togglePlay() {
-    if (this.track) {
-      this.playing ? this.mediaElement.pause() : this.mediaElement.play();
-      this.playing = !this.playing;
-    } else {
-      this.play();
-    }
+    this.playing ? this.mediaElement.pause() : this.mediaElement.play();
+    this.playing = !this.playing;
   }
 
   private startAudio() {
-    this.track.file.renderTo(this.mediaElement, {
+    this.currentTrack.file.renderTo(this.mediaElement, {
       controls: false
     }, (err, elem) => {
-      const mediaSource = this.audioContext.createMediaElementSource(elem);
-      mediaSource.connect(this.audioContext.destination);
+      this.mediaSource = this.audioContext.createMediaElementSource(elem);
+      this.mediaSource.connect(this.audioContext.destination);
       elem.onended = () => {
-        mediaSource.disconnect();
+        this.mediaSource.disconnect();
+        this.playNext();
       };
+      elem.onerror = () => stop();
     });
+  }
+
+  private updateTracks() {
+    this.nextTrack = this.queueService.queue[this.queueService.nextId];
+    this.previousTrack = this.queueService.queue[this.queueService.previousId];
   }
 }

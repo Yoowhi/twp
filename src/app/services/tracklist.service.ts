@@ -9,13 +9,11 @@ import {PlayerService} from './player.service';
 })
 export class TracklistService {
   trackList: Array<Track>;
-  trackChecks: Array<boolean>;
+  trackChecks: Array<boolean> = new Array<boolean>();
+  allChecked: boolean;
 
   get checkedTracks() {
-    const checks = this.trackList.filter((value, index) => this.trackChecks[index]);
-    if (checks.length === 0) {
-      return this.trackList;
-    }
+    return this.trackList.filter((value, index) => this.trackChecks[index]);
   }
 
   constructor(private libraryService: LibraryService,
@@ -24,8 +22,8 @@ export class TracklistService {
 
   public init(trackList: Array<Track>) {
     this.trackList = trackList;
-    this.trackChecks = new Array<boolean>();
     this.trackList.forEach(value => this.trackChecks.push(false));
+    this.allChecked = false;
   }
 
   public playTrackList(startIndex: number = 0) {
@@ -58,5 +56,10 @@ export class TracklistService {
     this.init(this.trackList);
   }
 
-
+  public allCheck() {
+    this.allChecked = !this.allChecked;
+    for (let i = 0; i < this.trackChecks.length; i++) {
+      this.trackChecks[i] = this.allChecked;
+    }
+  }
 }

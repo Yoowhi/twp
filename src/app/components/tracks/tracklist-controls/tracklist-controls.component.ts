@@ -11,6 +11,14 @@ export class TracklistControlsComponent implements OnInit {
   @Input() iconsOnly: boolean;
   @Input() queueEdit: boolean;
 
+  get somethingChecked() {
+    for (const check of this.tracklistService.trackChecks) {
+      if (check) {
+        return true;
+      }
+    }
+  }
+
   constructor(private tracklistService: TracklistService) { }
 
   ngOnInit() {
@@ -36,4 +44,7 @@ export class TracklistControlsComponent implements OnInit {
     this.tracklistService.removeTracks();
   }
 
+  allCheck() {
+    this.tracklistService.allCheck();
+  }
 }

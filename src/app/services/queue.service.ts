@@ -7,39 +7,51 @@ import {LibraryService} from './library.service';
 })
 export class QueueService {
   queue: Array<Track>;
-  currentTrack: number;
+  currentId: number;
 
-  constructor(private libraryService: LibraryService) {
-    this.applyDefaultQueue();
+  get nextId() {
+    return this.currentId < this.queue.length - 1 ? this.currentId + 1 : 0;
   }
 
-  public applyDefaultQueue() {
-    this.queue = this.libraryService.trackList.slice();
-    this.currentTrack = 0;
+  get previousId() {
+    return this.currentId > 0 ? this.currentId - 1 : this.queue.length - 1;
+  }
+
+  constructor(private libraryService: LibraryService) {
+    this.queue = new Array<Track>();
+    this.currentId = 0;
   }
 
   public setQueue(trackList: Array<Track>, startIndex) {
-    this.queue = trackList;
-    this.currentTrack = startIndex;
+    this.queue = trackList.slice();
+    this.currentId = startIndex;
+    this.queue.forEach(value => this.libraryService.carryTrack(value));
   }
 
   public addToQueue(trackList: Array<Track>) {
     this.queue = [...this.queue, ...trackList];
+    trackList.forEach(value => this.libraryService.carryTrack(value));
   }
 
   public removeFromQueue(trackList: Array<Track>) {
-    trackList.forEach(value => this.queue.splice(this.queue.indexOf(value), 1));
+    trackList.forEach(value => {
+      const indexToDel = this.queue.indexOf(value);
+      if (indexToDel !== -1) {
+        this.queue.splice(indexToDel, 1);
+        if (indexToDel === this.currentId) {
+          this.currentId = 0;
+        }
+      }
+    });
   }
 
-  public nextTrack(): Track {
-    this.currentTrack = this.currentTrack + 1 >= this.queue.length ? 0 : this.currentTrack + 1;
-    this.libraryService.carryTrack(this.queue[this.currentTrack]);
-    return this.queue[this.currentTrack];
+  public getNextTrack(): Track {
+    this.currentId = this.nextId;
+    return this.queue[this.currentId];
   }
 
-  public previousTrack(): Track {
-    this.currentTrack = this.currentTrack - 1 < this.queue.length ? this.queue.length : this.currentTrack - 1;
-    this.libraryService.carryTrack(this.queue[this.currentTrack]);
-    return this.queue[this.currentTrack];
+  public getPreviousTrack(): Track {
+    this.currentId = this.previousId;
+    return this.queue[this.currentId];
   }
 }
