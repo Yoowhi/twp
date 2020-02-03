@@ -3,17 +3,9 @@
 </div>
 <mat-card class="track-list">
   <mat-card-header>
-    <ng-container [ngSwitch]="playlist.generated">
-      <ng-container *ngSwitchCase="false">
-        <div mat-card-avatar><mat-icon class="playlist-icon">queue_music</mat-icon></div>
-        <mat-card-title>User Playlist</mat-card-title>
-      </ng-container>
-      <ng-container *ngSwitchCase="true">
-        <div mat-card-avatar><mat-icon class="playlist-icon">storage</mat-icon></div>
-        <mat-card-title>Source</mat-card-title>
-      </ng-container>
-    </ng-container>
-    <mat-card-subtitle>{{playlist.tracks.length}} tracks</mat-card-subtitle>
+        <div mat-card-avatar><mat-icon class="playlist-icon">{{playlist.generated ? 'storage' : 'queue_music'}}</mat-icon></div>
+        <mat-card-title>{{playlist.generated ? 'Source' : 'User Playlist'}}</mat-card-title>
+      <mat-card-subtitle>{{playlist.tracks.length}} tracks</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <app-tracklist-controls class="controls" [queueEdit]="true" [editable]="!playlist.generated" [iconsOnly]="false"></app-tracklist-controls>
