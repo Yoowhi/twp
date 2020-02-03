@@ -13,11 +13,12 @@ import {
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import { TracklistControlsComponent } from './tracklist-controls/tracklist-controls.component';
+import { QueueComponent } from './queue/queue.component';
 
 
 
 @NgModule({
-  declarations: [PlaylistComponent, TrackListComponent, TracklistControlsComponent],
+  declarations: [PlaylistComponent, TrackListComponent, TracklistControlsComponent, QueueComponent],
   exports: [
   ],
   imports: [

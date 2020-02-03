@@ -28,7 +28,7 @@ export class TracklistService {
 
   public playTrackList(startIndex: number = 0) {
     this.queueService.setQueue(this.checkedTracks, startIndex);
-    this.playerService.togglePlay();
+    this.playerService.play();
     this.init(this.trackList);
   }
 
@@ -48,11 +48,14 @@ export class TracklistService {
   }
 
   public removeTracks() {
+    const checksToRemove = new Array<number>();
     for (let i = 0; i < this.trackChecks.length; i++) {
       if (this.trackChecks[i]) {
         this.trackList.splice(i, 1);
+        checksToRemove.push(i);
       }
     }
+    checksToRemove.forEach(value => this.trackChecks.splice(value, 1));
     this.init(this.trackList);
   }
 

@@ -1,0 +1,9 @@
+<mat-card class="track-list">
+  <mat-card-header>
+    <mat-card-title>{{queueService.queue.length}} tracks</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-tracklist-controls class="controls" [queueEdit]="false" [editable]="true" [iconsOnly]="false"></app-tracklist-controls>
+    <app-track-list [trackList]="queueService.queue"></app-track-list>
+  </mat-card-content>
+</mat-card>
